@@ -13,8 +13,15 @@ const getArtists = async () => {
 
 const createArtist = async (data) => {
     try {
-        const { bio } = data
-        const isExist = await Artist.findOne({ bio }).exec();
+        const { artistname, bio, genre } = data
+        const isExist = await Artist.findOne({ artistname, bio, genre }).exec();
+        if (!artistname || !bio || !genre) {
+            return {
+                statusCode: 400,
+                ok: false,
+                message: 'Thiếu các trường bắt buộc!'
+            };
+        }
         if (isExist) {
             return {
                 ok: false,
@@ -23,7 +30,7 @@ const createArtist = async (data) => {
             }
         }
         const artist = await Artist.create(
-            { bio }
+            { artistname, bio, genre }
         );
         return {
             ok: true,

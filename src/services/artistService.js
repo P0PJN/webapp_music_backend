@@ -2,6 +2,7 @@ const artist = require('../models/artist');
 const Artist = require('../models/artist');
 
 const getArtists = async () => {
+
     try {
         const artists = await ArtistModel.find();
         return { statusCode: 200, ok: true, data: artists };
@@ -12,6 +13,7 @@ const getArtists = async () => {
 };
 
 const createArtist = async (data) => {
+
     try {
         const { artistname, bio, genre } = data
         const isExist = await Artist.findOne({ artistname, bio, genre }).exec();
@@ -45,6 +47,7 @@ const createArtist = async (data) => {
 };
 
 const updateArtist = async (artistId, updatedData) => {
+
     try {
         const result = await ArtistModel.findByIdAndUpdate(artistId, updatedData, { new: true });
         return { statusCode: 200, ok: true, data: result, message: 'Artist updated successfully' };
@@ -55,6 +58,7 @@ const updateArtist = async (artistId, updatedData) => {
 };
 
 const deleteArtist = async (artistId) => {
+
     try {
         const result = await ArtistModel.findByIdAndDelete(artistId);
         return { statusCode: 200, ok: true, data: result, message: 'Artist deleted successfully' };

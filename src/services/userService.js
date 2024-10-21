@@ -1,6 +1,7 @@
 const User = require("../models/user")
 
 const getUsers = async () => {
+
     const users = await User.find({});
     return {
         ok: true,
@@ -11,6 +12,7 @@ const getUsers = async () => {
 }
 
 const createUsers = async (data) => {
+
     const { username, email, password } = data
     const isExist = await User.findOne({ email: email }).exec();
     if (isExist) {
@@ -32,6 +34,7 @@ const createUsers = async (data) => {
 }
 
 const updateUser = async (_id, username) => {
+
     if (!_id || !username) {
         return {
             ok: false,
@@ -59,6 +62,7 @@ const updateUser = async (_id, username) => {
 }
 
 const deleteUser = async (_id) => {
+
     if (!_id) {
         return {
             ok: false,

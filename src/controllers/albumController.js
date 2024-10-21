@@ -1,6 +1,7 @@
 const albumService = require('../services/albumService');
 
 const getAlbums = async (req, res) => {
+
     try {
         const result = await albumService.getAlbums();
         return res.status(result.statusCode).json({
@@ -16,6 +17,7 @@ const getAlbums = async (req, res) => {
 }
 
 const createAlbum = async (req, res) => {
+
     try {
         const result = await albumService.createAlbum(req.body);
         return res.status(result.statusCode).json({
@@ -31,7 +33,9 @@ const createAlbum = async (req, res) => {
         })
     }
 }
+
 const updateAlbum = async (req, res) => {
+
     try {
         const _id = req.params.id;
         const title = req.body.title
@@ -50,7 +54,9 @@ const updateAlbum = async (req, res) => {
         })
     }
 }
+
 const deleteAlbum = async (req, res) => {
+
     try {
         const _id = req.params.id;
         const result = await albumService.deleteAlbum(_id);
@@ -67,6 +73,7 @@ const deleteAlbum = async (req, res) => {
         })
     }
 }
+
 module.exports = {
     getAlbums, createAlbum,
     updateAlbum, deleteAlbum

@@ -1,6 +1,7 @@
 const path = require('path');
 
 const uploadSingleFile = async (fileObject) => {
+
     let uploadPath = path.resolve(__dirname, "../public/images");
     // get image extension
     let extName = path.extname(fileObject.name); // .png, .jpg, ...

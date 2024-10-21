@@ -1,6 +1,7 @@
 const playlistService = require('../services/playlistService');
 
 const getPlaylists = async (req, res) => {
+
     try {
         const result = await playlistService.getPlaylists();
         return res.status(result.statusCode).json({
@@ -16,6 +17,7 @@ const getPlaylists = async (req, res) => {
 };
 
 const create = async (req, res) => {
+
     try {
         const result = await playlistService.createPlaylist(req.body);
         return res.status(result.statusCode).json({
@@ -33,6 +35,7 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
+
     try {
         const playlistId = req.params.id;
         const updatedData = req.body;
@@ -52,6 +55,7 @@ const update = async (req, res) => {
 };
 
 const remove = async (req, res) => {
+
     try {
         const playlistId = req.params.id;
         const result = await playlistService.deletePlaylist(playlistId);

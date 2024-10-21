@@ -1,6 +1,7 @@
 const songService = require('../services/songService');
 
 const getSongs = async (req, res) => {
+
     try {
         const result = await songService.getSongs();
         return res.status(result.statusCode).json({
@@ -16,6 +17,7 @@ const getSongs = async (req, res) => {
 }
 
 const createSong = async (req, res) => {
+
     try {
         const result = await songService.createSong(req.body);
         return res.status(result.statusCode).json({
@@ -31,7 +33,9 @@ const createSong = async (req, res) => {
         })
     }
 }
+
 const updateSong = async (req, res) => {
+
     try {
         const _id = req.params.id;
         const title = req.body.title
@@ -50,7 +54,9 @@ const updateSong = async (req, res) => {
         })
     }
 }
+
 const deleteSong = async (req, res) => {
+
     try {
         const _id = req.params.id;
         const result = await songService.deleteSong(_id);
@@ -67,6 +73,7 @@ const deleteSong = async (req, res) => {
         })
     }
 }
+
 module.exports = {
     getSongs, createSong,
     updateSong, deleteSong

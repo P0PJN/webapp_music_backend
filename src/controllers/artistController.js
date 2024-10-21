@@ -1,6 +1,7 @@
 const artistService = require('../services/artistService');
 
 const getArtists = async (req, res) => {
+
     try {
         const result = await artistService.getArtists();
         return res.status(result.statusCode).json({ ok: result.ok, data: result.data });
@@ -10,6 +11,7 @@ const getArtists = async (req, res) => {
 };
 
 const create = async (req, res) => {
+
     try {
         const result = await artistService.createArtist(req.body);
         return res.status(result.statusCode).json({ ok: result.ok, data: result.data, message: result.message });
@@ -20,6 +22,7 @@ const create = async (req, res) => {
 };
 
 const update = async (req, res) => {
+
     try {
         const artistId = req.params.id;
         const updatedData = req.body;
@@ -32,6 +35,7 @@ const update = async (req, res) => {
 };
 
 const remove = async (req, res) => {
+
     try {
         const artistId = req.params.id;
         const result = await artistService.deleteArtist(artistId);

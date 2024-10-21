@@ -10,7 +10,9 @@ const getAlbums = async () => {
         message: "Lay album thanh cong!"
     }
 }
+
 const createAlbum = async (data) => {
+
     const { title, releaseDate } = data
     const isExist = await Album.findOne({ title: title }).exec();
     if (isExist) {
@@ -30,7 +32,9 @@ const createAlbum = async (data) => {
         message: "Tao thanh cong!"
     }
 }
+
 const updateAlbum = async (_id, title) => {
+
     if (!_id || !title) {
         return {
             ok: false,
@@ -58,6 +62,7 @@ const updateAlbum = async (_id, title) => {
 }
 
 const deleteAlbum = async (_id) => {
+
     if (!_id) {
         return {
             ok: false,
@@ -83,6 +88,7 @@ const deleteAlbum = async (_id) => {
         }
     }
 }
+
 module.exports = {
     getAlbums, createAlbum, updateAlbum, deleteAlbum
 }

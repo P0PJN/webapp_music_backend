@@ -1,6 +1,7 @@
 const PlaylistModel = require('../models/playlist');
 
 const getPlaylists = async () => {
+
     try {
         const playlists = await PlaylistModel.find().populate('songs');
         return {
@@ -20,6 +21,7 @@ const getPlaylists = async () => {
 };
 
 const createPlaylist = async (playlistData) => {
+
     try {
         const newPlaylist = new PlaylistModel(playlistData);
         const result = await newPlaylist.save();
@@ -41,6 +43,7 @@ const createPlaylist = async (playlistData) => {
 };
 
 const updatePlaylist = async (playlistId, updatedData) => {
+
     try {
         const result = await PlaylistModel.findByIdAndUpdate(playlistId, updatedData, { new: true });
         return {
@@ -61,6 +64,7 @@ const updatePlaylist = async (playlistId, updatedData) => {
 };
 
 const deletePlaylist = async (playlistId) => {
+
     try {
         const result = await PlaylistModel.findByIdAndDelete(playlistId);
         return {

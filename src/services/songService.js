@@ -1,6 +1,7 @@
 const Song = require("../models/song")
 
 const getSongs = async () => {
+
     const songs = await Song.find({});
     return {
         ok: true,
@@ -9,7 +10,9 @@ const getSongs = async () => {
         message: "Lay bai hat thanh cong!"
     }
 }
+
 const createSong = async (data) => {
+
     const { title, streamUrl } = data
     const isExist = await Song.findOne({ title: title }).exec();
     if (isExist) {
@@ -29,7 +32,9 @@ const createSong = async (data) => {
         message: "Tao thanh cong!"
     }
 }
+
 const updateSong = async (_id, title) => {
+
     if (!_id || !title) {
         return {
             ok: false,
@@ -57,6 +62,7 @@ const updateSong = async (_id, title) => {
 }
 
 const deleteSong = async (_id) => {
+
     if (!_id) {
         return {
             ok: false,
@@ -82,6 +88,7 @@ const deleteSong = async (_id) => {
         }
     }
 }
+
 module.exports = {
     getSongs, createSong, updateSong, deleteSong
 }

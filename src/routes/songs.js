@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/", getSongs);
 router.post("/", createSong);
 router.put("/:id", updateSong);
+router.patch("/:id", updateSong);
 router.delete("/:id", deleteSong);
 
 module.exports = router;

@@ -31,7 +31,7 @@ app.use('/songs', songsRouter);
 app.use('/upload', uploadRouter);
 app.use('/albums', albumRouter);
 app.use('/artist', artistRouter);
-app, use('/playlist', playlistRouter);
+app.use('/playlist', playlistRouter);
 
 // Khởi động server
 const PORT = process.env.PORT;

@@ -1,6 +1,7 @@
 const Album = require("../models/album")
 
 const getAlbums = async () => {
+
     const albums = await Album.find({});
     return {
         ok: true,

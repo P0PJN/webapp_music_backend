@@ -4,8 +4,8 @@ const { getArtists, create, update, remove } = require('../controllers/artistCon
 
 router.get("/", getArtists);
 router.post("/", create);
-router.put("/:id", update);
-router.patch("/:id", update);
-router.delete("/:id", remove);
+router.put("/:id", update); // Chỉ định ID cho cập nhật
+router.patch("/:id", update); // Cũng có thể dùng PATCH cho cập nhật từng phần
+router.delete("/:id", remove); // Chỉ định ID cho xóa
 
 module.exports = router;

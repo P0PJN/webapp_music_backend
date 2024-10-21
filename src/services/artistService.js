@@ -1,30 +1,20 @@
 const artist = require('../models/artist');
+const Artist = require('../models/artist');
 
 const getArtists = async () => {
-
     try {
-        const artists = await artist.find();
-        return {
-            statusCode: 200,
-            ok: true,
-            data: artists
-        };
+        const artists = await ArtistModel.find();
+        return { statusCode: 200, ok: true, data: artists };
     } catch (error) {
         console.error(error);
-        return {
-            statusCode: 500,
-            ok: false,
-            data: null,
-            message: 'Failed to get artists'
-        };
+        return { statusCode: 500, ok: false, data: null, message: 'Failed to get artists' };
     }
 };
 
 const createArtist = async (data) => {
-
     try {
         const { bio } = data
-        const isExist = await Artist.findOne({ title: title }).exec();
+        const isExist = await Artist.findOne({ bio }).exec();
         if (isExist) {
             return {
                 ok: false,
@@ -32,63 +22,38 @@ const createArtist = async (data) => {
                 message: `Mo ta nghe si da ton tai!`
             }
         }
-        const song = await Artist.create(
+        const artist = await Artist.create(
             { bio }
         );
         return {
-            statusCode: 201,
             ok: true,
-            data: result,
-            message: 'Artist created successfully'
-        };
+            statusCode: 200,
+            data: artist,
+            message: "Tao thanh cong!"
+        }
     } catch (error) {
         console.error(error);
-        return {
-            statusCode: 500,
-            ok: false,
-            data: null,
-            message: 'Failed to create artist'
-        };
+        return { statusCode: 500, ok: false, data: null, message: 'Failed to create artist' };
     }
 };
 
 const updateArtist = async (artistId, updatedData) => {
     try {
-        const result = await artist.findByIdAndUpdate(artistId, updatedData, { new: true });
-        return {
-            statusCode: 200,
-            ok: true,
-            data: result,
-            message: 'Artist updated successfully'
-        };
+        const result = await ArtistModel.findByIdAndUpdate(artistId, updatedData, { new: true });
+        return { statusCode: 200, ok: true, data: result, message: 'Artist updated successfully' };
     } catch (error) {
         console.error(error);
-        return {
-            statusCode: 500,
-            ok: false,
-            data: null,
-            message: 'Failed to update artist'
-        };
+        return { statusCode: 500, ok: false, data: null, message: 'Failed to update artist' };
     }
 };
 
 const deleteArtist = async (artistId) => {
     try {
-        const result = await artist.findByIdAndDelete(artistId);
-        return {
-            statusCode: 200,
-            ok: true,
-            data: result,
-            message: 'Artist deleted successfully'
-        };
+        const result = await ArtistModel.findByIdAndDelete(artistId);
+        return { statusCode: 200, ok: true, data: result, message: 'Artist deleted successfully' };
     } catch (error) {
         console.error(error);
-        return {
-            statusCode: 500,
-            ok: false,
-            data: null,
-            message: 'Failed to delete artist'
-        };
+        return { statusCode: 500, ok: false, data: null, message: 'Failed to delete artist' };
     }
 };
 

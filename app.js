@@ -4,10 +4,12 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
-const usersRouter = require('./src/routes/users');
+const albumRouter = require('./src/routes/albums');
+const artistRouter = require('./src/routes/artist');
+const playlistRouter = require('./src/routes/playlist');
 const songsRouter = require('./src/routes/songs');
 const uploadRouter = require('./src/routes/upload');
-const albumRouter = require('./src/routes/albums')
+const usersRouter = require('./src/routes/users');
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
@@ -28,6 +30,9 @@ app.use('/users', usersRouter);
 app.use('/songs', songsRouter);
 app.use('/upload', uploadRouter);
 app.use('/albums', albumRouter);
+app.use('/artist', artistRouter);
+app, use('/playlist', playlistRouter);
+
 // Khởi động server
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

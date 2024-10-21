@@ -1,7 +1,6 @@
-const song = require("../models/song");
+const Song = require("../models/song")
 
 const getSongs = async () => {
-
     const songs = await Song.find({});
     return {
         ok: true,
@@ -10,9 +9,7 @@ const getSongs = async () => {
         message: "Lay bai hat thanh cong!"
     }
 }
-
 const createSong = async (data) => {
-
     const { title, streamUrl } = data
     const isExist = await Song.findOne({ title: title }).exec();
     if (isExist) {
@@ -32,47 +29,59 @@ const createSong = async (data) => {
         message: "Tao thanh cong!"
     }
 }
-
-const updateSong = async (songId, updatedData) => {
-    try {
-        const result = await song.findByIdAndUpdate(songId, updatedData, { new: true });
+const updateSong = async (_id, title) => {
+    if (!_id || !title) {
         return {
-            statusCode: 200,
-            ok: true,
-            data: result,
-            message: 'Song updated successfully'
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
             ok: false,
-            data: null,
-            message: 'Failed to update song'
-        };
+            statusCode: 400,
+            message: `Missing required params`
+        }
     }
-};
-
-const deleteSong = async (songId) => {
-    try {
-        const result = await song.findByIdAndDelete(songId);
+    const data = await Song.updateOne({ _id: _id }, { title: title });
+    if (data.upsertedCount === 0) {
         return {
-            statusCode: 200,
             ok: true,
-            data: result,
-            message: 'Song deleted successfully'
-        };
-    } catch (error) {
-        console.error(error);
-        return {
-            statusCode: 500,
-            ok: false,
-            data: null,
-            message: 'Failed to delete song'
-        };
+            statusCode: 200,
+            data: data,
+            message: "Sua thanh cong!"
+        }
     }
-};
+    else {
+        return {
+            ok: true,
+            statusCode: 400,
+            data: null,
+            message: "Sua that bai!"
+        }
+    }
+}
 
+const deleteSong = async (_id) => {
+    if (!_id) {
+        return {
+            ok: false,
+            statusCode: 400,
+            message: `Missing required params`
+        }
+    }
+    const data = await Song.deleteOne({ _id: _id });
+    if (data.deletedCount === 1) {
+        return {
+            ok: true,
+            statusCode: 200,
+            data: data,
+            message: "Xoa thanh cong!"
+        }
+    }
+    else {
+        return {
+            ok: true,
+            statusCode: 400,
+            data: null,
+            message: "Xoa that bai!"
+        }
+    }
+}
 module.exports = {
     getSongs, createSong, updateSong, deleteSong
 }

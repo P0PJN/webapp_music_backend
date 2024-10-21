@@ -4,11 +4,10 @@ const cors = require('cors');
 const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
-const artistRouter = require('./src/routes/artist');
 const usersRouter = require('./src/routes/users');
 const songsRouter = require('./src/routes/songs');
 const uploadRouter = require('./src/routes/upload');
-
+const albumRouter = require('./src/routes/albums')
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
@@ -25,11 +24,10 @@ app.get('/', (req, res) => {
   res.send('Welcome to Music App');
 });
 
-app.use('/artist', artistRouter);
 app.use('/users', usersRouter);
 app.use('/songs', songsRouter);
 app.use('/upload', uploadRouter);
-
+app.use('/albums', albumRouter);
 // Khởi động server
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
